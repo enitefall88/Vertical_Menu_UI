@@ -1,27 +1,27 @@
 function App() {
-  let list = ["first item", "second item", "third item", "fourth item"]
-
   let query = (new URL(document.location)).searchParams
-  let page = Number(query.get("p")) || 1 // current page
+  console.log(query)
+  let c = Number(query.get("c")) || 3
 
-  return (
-    <div className="App">
-      <ul className="list-group">
-        {list.map((element, index) => listElement({element, index, page}))}
-
-      </ul>
-    </div>
-  );
+  return <div className="p-3">
+    <DisplayLi c={c}  xs={[
+    "First Item",
+    "Second Item",
+    "Third Item",
+    "Fourth Item",
+    "Fifth Item"
+  ]}/>
+  </div>
 }
 
-function listElement({element, index, page}) {
-
-
-  return <li>
-    <a key={index} href={`?page=${index}`} className={`list-group-item list-group-item-action ${index == page ? "active" : null}`} >
-    {element}
-    </a>
-  </li>
+function DisplayLi({c, xs}) {
+  console.log(c)
+  return <ul className="list-group">
+    {xs.map((el,i) =>
+        <a key={i} href={`?c=${i}`} className={`list-group-item list-group-item-action ${i == c ? "active" : null}`}>
+  {el}
+        </a>)}
+  </ul >
 }
 
 export default App;
